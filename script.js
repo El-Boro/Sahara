@@ -70,3 +70,23 @@ document.addEventListener("DOMContentLoaded", () => {
     input.value = "";
   });
 });
+
+// Cargar top 10 en modo más vistoso
+const ranking = document.getElementById("rankingList");
+if (ranking) {
+  const data = [
+    { name: "Juan Pérez", score: 980 },
+    { name: "Lucía Gómez", score: 950 },
+    { name: "Carlos Díaz", score: 920 },
+    { name: "María López", score: 900 },
+    { name: "Pedro Fernández", score: 870 },
+    { name: "Ana Morales", score: 850 },
+    { name: "Gonzalo Torres", score: 820 },
+    { name: "Camila Romero", score: 800 },
+    { name: "Martín Ruiz", score: 780 },
+    { name: "Sofía Herrera", score: 760 },
+  ];
+  ranking.innerHTML = data.map(u => 
+    `<div class="ranking-entry"><span>${u.name}</span><span>${u.score} pts</span></div>`
+  ).join("");
+}
