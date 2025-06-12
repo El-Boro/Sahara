@@ -1,0 +1,149 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
+import { motion, AnimatePresence } from "framer-motion";
+
+export default function SaharaDemo() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const [tab, setTab] = useState("login");
+  const [userPoints, setUserPoints] = useState(240);
+  const [code, setCode] = useState("");
+  const [codeHistory, setCodeHistory] = useState([]);
+  const [rewards, setRewards] = useState([]);
+
+  const handleCodeSubmit = (e) => {
+    e.preventDefault();
+    if (code.trim()) {
+      const isValid = code.length >= 5 && /^[A-Z0-9]+$/.test(code.toUpperCase());
+      const codeUpper = code.toUpperCase();
+      if (isValid && !codeHistory.includes(codeUpper)) {
+        const newPoints = userPoints + 10;
+        setUserPoints(newPoints);
+        setCodeHistory([...codeHistory, codeUpper]);
+        if (newPoints >= 250 && !rewards.includes("1 cerveza gratis")) {
+          setRewards([...rewards, "1 cerveza gratis"]);
+        }
+        if (newPoints >= 300 && !rewards.includes("Kit Sahara exclusivo")) {
+          setRewards([...rewards, "Kit Sahara exclusivo"]);
+        }
+      }
+      setCode("");
+    }
+  };
+
+  const topUsers = [
+    { name: "Juan Pérez", score: 980 },
+    { name: "Lucía Gómez", score: 950 },
+    { name: "Carlos Díaz", score: 920 },
+    { name: "María López", score: 900 },
+    { name: "Pedro Fernández", score: 870 },
+    { name: "Ana Morales", score: 850 },
+    { name: "Gonzalo Torres", score: 820 },
+    { name: "Camila Romero", score: 800 },
+    { name: "Martín Ruiz", score: 780 },
+    { name: "Sofía Herrera", score: 760 },
+  ];
+
+  const containerStyle = darkMode ? "bg-[#0d1b1e] text-white" : "bg-[#f9f6ef] text-[#1a1a1a]";
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${containerStyle} font-sans`}>
+      <div className="bg-[url('https://www.cervezacorona.com.ar/themes/custom/corona/img/home/hero.jpg')] bg-cover bg-center py-20 px-6 shadow-inner">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">Cerveza Sahara</h1>
+          <p className="mt-4 text-xl text-white/90">El oro del desierto. El lujo en tu copa.</p>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-semibold">Explorá nuestra experiencia</h2>
+          <div className="flex items-center gap-2">
+            <span className="text-sm">Modo Oscuro</span>
+            <Switch checked={darkMode} onCheckedChange={() => setDarkMode(!darkMode)} />
+          </div>
+        </div>
+
+        <Tabs value={tab} onValueChange={setTab}>
+          <TabsList className="grid grid-cols-4 gap-2 mb-6">
+            {!loggedIn && <TabsTrigger value="login">Iniciar sesión</TabsTrigger>}
+            {loggedIn && <TabsTrigger value="usuario">Mi Perfil</TabsTrigger>}
+            <TabsTrigger value="ranking">Top 10 Usuarios</TabsTrigger>
+            <TabsTrigger value="process">Proceso</TabsTrigger>
+            <TabsTrigger value="productos">Productos</TabsTrigger>
+          </TabsList>
+
+          <AnimatePresence mode="wait">
+            {!loggedIn && tab === "login" && (
+              <TabsContent value="login" forceMount>
+                <motion.div key="login" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      setLoggedIn(true);
+                      setTab("usuario");
+                    }}
+                    className="space-y-4 max-w-sm mx-auto"
+                  >
+                    <Input placeholder="Usuario" required />
+                    <Input type="password" placeholder="Contraseña" required />
+                    <Button type="submit" className="w-full bg-yellow-600 hover:bg-yellow-700 text-white">
+                      Iniciar Sesión
+                    </Button>
+                  </form>
+                </motion.div>
+              </TabsContent>
+            )}
+
+            {loggedIn && tab === "usuario" && (
+              <TabsContent value="usuario" forceMount>
+                <motion.div key="usuario" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
+                  <div className="max-w-xl mx-auto space-y-6">
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold">¡Bienvenido/a!</h3>
+                      <p className="text-lg">Tus puntos acumulados: <span className="font-semibold text-yellow-600">{userPoints}</span></p>
+                    </div>
+                    <form onSubmit={handleCodeSubmit} className="flex flex-col items-center space-y-3">
+                      <Input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Ingresá tu código de serie" required />
+                      <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white">Cargar Código</Button>
+                    </form>
+
+                    {codeHistory.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold mt-6">Códigos ingresados:</h4>
+                        <ul className="list-disc pl-6 text-sm mt-2">
+                          {codeHistory.map((c, i) => (
+                            <li key={i}>{c}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {rewards.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold mt-6">Recompensas obtenidas:</h4>
+                        <ul className="list-disc pl-6 text-sm mt-2 text-yellow-600">
+                          {rewards.map((r, i) => (
+                            <li key={i}>{r}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              </TabsContent>
+            )}
+
+            {/* Secciones existentes: ranking, process, productos */}
+
+            {/* ... (el resto del código permanece igual) */}
+          </AnimatePresence>
+        </Tabs>
+      </div>
+    </div>
+  );
+}
