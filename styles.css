@@ -1,12 +1,12 @@
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
   margin: 0;
   background: #f9f6ef;
   color: #1a1a1a;
+  font-family: 'Playfair Display', serif;
 }
 
 .hero {
@@ -15,6 +15,23 @@ body {
   text-align: center;
   padding: 4rem 1rem;
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 {
+  font-family: 'Cinzel', cursive;
+  font-size: 4rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+.hero p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  margin-top: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .tabs {
@@ -33,10 +50,16 @@ body {
   border-radius: 5px;
   font-weight: bold;
   transition: all 0.2s ease-in-out;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
 }
 
 .tabs button:hover {
   background: #ffcd6b;
+}
+
+.tabs button.hidden {
+  display: none;
 }
 
 main {
@@ -64,6 +87,8 @@ input, button {
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
 }
 
 button {
@@ -76,20 +101,6 @@ button {
 
 button:hover {
   background-color: #e0a800;
-}
-
-ol {
-  max-width: 500px;
-  margin: auto;
-  padding: 1rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-ol li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
 }
 
 .map {
@@ -105,11 +116,6 @@ ol li {
 }
 
 /* Animaciones y transiciones suaves */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 button, input {
   transition: all 0.3s ease;
 }
@@ -120,11 +126,16 @@ input:focus, button:focus {
   border-color: #f7d35a;
 }
 
-.tab-content {
-  animation: fadeIn 0.4s ease;
+/* Estilos para el ranking */
+#rankingList {
+  max-width: 500px;
+  margin: auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* Ranking colorido */
 .ranking-entry {
   display: flex;
   justify-content: space-between;
@@ -134,4 +145,54 @@ input:focus, button:focus {
   margin: 0.5rem 0;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: 'Playfair Display', serif;
+}
+
+/* Estilos para listas en el perfil */
+#codeList ul, #rewardsList ul {
+  padding: 0;
+  list-style: none;
+}
+
+#codeList li, #rewardsList li {
+  padding: 0.5rem;
+  background: #fff9e6;
+  margin: 0.25rem 0;
+  border-radius: 4px;
+  font-family: 'Playfair Display', serif;
+}
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0;
+}
+
+/* Responsive: ajustes para móviles */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero p {
+    font-size: 1.2rem;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+  }
+  
+  .tabs button {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  #rankingList {
+    padding: 0.5rem;
+  }
+  
+  .ranking-entry {
+    font-size: 0.9rem;
+  }
 }
