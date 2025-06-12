@@ -1,40 +1,415 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Switch } from "@/components/ui/switch";
-import { motion, AnimatePresence } from "framer-motion";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cerveza Sahara - Demo</title>
+<style>
+  /* Reset y base */
+  body {
+    margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9f6ef; color: #1a1a1a;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  body.dark {
+    background: #0d1b1e; color: white;
+  }
 
-export default function SaharaDemo() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-  const [tab, setTab] = useState("login");
-  const [userPoints, setUserPoints] = useState(240);
-  const [code, setCode] = useState("");
-  const [codeHistory, setCodeHistory] = useState([]);
-  const [rewards, setRewards] = useState([]);
+  h1, h2, h3, h4 {
+    margin: 0 0 0.5rem 0;
+  }
 
-  const handleCodeSubmit = (e) => {
-    e.preventDefault();
-    if (code.trim()) {
-      const isValid = code.length >= 5 && /^[A-Z0-9]+$/.test(code.toUpperCase());
-      const codeUpper = code.toUpperCase();
-      if (isValid && !codeHistory.includes(codeUpper)) {
-        const newPoints = userPoints + 10;
-        setUserPoints(newPoints);
-        setCodeHistory([...codeHistory, codeUpper]);
-        if (newPoints >= 250 && !rewards.includes("1 cerveza gratis")) {
-          setRewards([...rewards, "1 cerveza gratis"]);
-        }
-        if (newPoints >= 300 && !rewards.includes("Kit Sahara exclusivo")) {
-          setRewards([...rewards, "Kit Sahara exclusivo"]);
-        }
+  /* Contenedor principal */
+  .container {
+    max-width: 900px; margin: auto; padding: 1rem;
+  }
+
+  /* Header con fondo y texto */
+  header {
+    background: url('https://www.cervezacorona.com.ar/themes/custom/corona/img/home/hero.jpg') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 5rem 1rem 3rem;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+  }
+
+  header h1 {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+  header p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+  }
+
+  /* Toggle modo oscuro */
+  .toggle-dark {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+  .toggle-dark label {
+    user-select: none;
+  }
+
+  /* Tabs nav */
+  .tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .tabs button {
+    background: #eee;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+  .tabs button.active {
+    background: #f9a825;
+    color: white;
+    box-shadow: 0 0 8px #f9a825aa;
+  }
+  body.dark .tabs button {
+    background: #12303c;
+    color: #ccc;
+  }
+  body.dark .tabs button.active {
+    background: #f9a825;
+    color: #1a1a1a;
+  }
+
+  /* Secciones */
+  section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Formularios */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.3rem 0 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  button.submit-btn {
+    background: #f9a825;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 30px;
+    font-weight: 700;
+    color: #1a1a1a;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  button.submit-btn:hover {
+    background: #cfa900;
+  }
+
+  /* Perfil */
+  .profile {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+  }
+  .points {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #f9a825;
+    font-weight: 700;
+  }
+  ul.codes, ul.rewards {
+    text-align: left;
+    max-width: 300px;
+    margin: 0.5rem auto 1rem;
+    list-style: disc inside;
+    color: #f9a825;
+  }
+  ul.rewards li {
+    font-weight: 700;
+  }
+
+  /* Ranking */
+  .ranking-list {
+    max-width: 600px;
+    margin: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #f9a825aa;
+  }
+  .ranking-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    background: #fff3c4;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+  .ranking-item:nth-child(odd) {
+    background: #f9e79f;
+  }
+  body.dark .ranking-item {
+    background: #25403d;
+    color: #f9a825;
+  }
+  .ranking-item:hover {
+    background: #f9a825;
+    color: #1a1a1a;
+  }
+  .rank-number {
+    width: 2rem;
+    font-weight: 700;
+  }
+  .user-name {
+    flex-grow: 1;
+    padding-left: 1rem;
+  }
+  .score {
+    width: 3rem;
+    text-align: right;
+  }
+
+  /* Proceso fabricación */
+  .process-map {
+    max-width: 700px;
+    margin: auto;
+  }
+  .process-map img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  .process-description {
+    background: #fff3c4;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #f9a825aa;
+    color: #1a1a1a;
+  }
+  body.dark .process-description {
+    background: #25403d;
+    color: #f9a825;
+  }
+
+  /* Productos */
+  .products-list {
+    max-width: 700px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+    gap: 1rem;
+  }
+  .product-card {
+    background: #fff3c4;
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 8px #f9a825aa;
+    transition: transform 0.3s ease;
+  }
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+  .product-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+  }
+  body.dark .product-card {
+    background: #25403d;
+    color: #f9a825;
+  }
+
+</style>
+</head>
+<body>
+<header>
+  <h1>Cerveza Sahara</h1>
+  <p>El oro del desierto. El lujo en tu copa.</p>
+</header>
+<div class="container">
+
+  <div class="toggle-dark">
+    <label for="darkmode-toggle">Modo Oscuro</label>
+    <input type="checkbox" id="darkmode-toggle" />
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="login" class="active">Iniciar sesión</button>
+    <button data-tab="ranking">Top 10 Usuarios</button>
+    <button data-tab="process">Proceso</button>
+    <button data-tab="productos">Productos</button>
+  </nav>
+
+  <section id="login" class="active" aria-label="Login">
+    <form id="login-form" style="max-width: 300px; margin: auto;">
+      <input type="text" id="username" placeholder="Usuario" required autocomplete="username" />
+      <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password" />
+      <button type="submit" class="submit-btn">Iniciar Sesión</button>
+    </form>
+  </section>
+
+  <section id="profile" aria-label="Perfil de usuario" style="display:none;">
+    <div class="profile">
+      <h3>¡Bienvenido/a!</h3>
+      <p class="points">Tus puntos acumulados: <span id="user-points">240</span></p>
+      <form id="code-form">
+        <input type="text" id="code-input" placeholder="Ingresá tu código de serie" required maxlength="10" style="text-transform:uppercase;" />
+        <button type="submit" class="submit-btn">Cargar Código</button>
+      </form>
+      <div id="codes-list-container" style="display:none;">
+        <h4>Códigos ingresados:</h4>
+        <ul class="codes" id="codes-list"></ul>
+      </div>
+      <div id="rewards-list-container" style="display:none;">
+        <h4>Recompensas obtenidas:</h4>
+        <ul class="rewards" id="rewards-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="ranking" aria-label="Ranking de usuarios">
+    <div class="ranking-list" id="ranking-list">
+      <!-- Se cargan dinámicamente -->
+    </div>
+  </section>
+
+  <section id="process" aria-label="Proceso de fabricación">
+    <div class="process-map">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Argentina_-_Provincias_-_Location_Map.svg/1024px-Argentina_-_Provincias_-_Location_Map.svg.png" alt="Mapa de Argentina con proceso" />
+      <div class="process-description">
+        <h3>Recorrido del proceso de fabricación de Cerveza Sahara</h3>
+        <p><strong>Materia prima:</strong> Malta y lúpulo cultivados en Mendoza y Tucumán.</p>
+        <p><strong>Proceso:</strong> La malta y el lúpulo se transportan a la planta en Córdoba, donde se realiza la elaboración, fermentación y envasado.</p>
+        <p><strong>Distribución:</strong> La cerveza final se envía a puntos de venta en todo el país, principalmente Buenos Aires y Rosario.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="productos" aria-label="Productos de Sahara">
+    <div class="products-list">
+      <div class="product-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="Sahara Lager" />
+        <h4>Sahara Lager</h4>
+        <p>Clásica, suave y refrescante.</p>
+      </div>
+      <div class="product-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833315.png" alt="Sahara IPA" />
+        <h4>Sahara IPA</h4>
+        <p>Con cuerpo y amargor equilibrado.</p>
+      </div>
+      <div class="product-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/833/833316.png" alt="Sahara Stout" />
+        <h4>Sahara Stout</h4>
+        <p>Intensa y cremosa.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Variables usuario y puntos simulados
+  let loggedIn = false;
+  let userPoints = 240;
+  let codesEntered = [];
+  let rewards = [];
+
+  const tabs = document.querySelectorAll('.tabs button');
+  const sections = document.querySelectorAll('section');
+
+  function showSection(id) {
+    sections.forEach(s => {
+      if (s.id === id) {
+        s.classList.add('active');
+        s.style.display = 'block';
+      } else {
+        s.classList.remove('active');
+        s.style.display = 'none';
       }
-      setCode("");
-    }
-  };
+    });
 
+    // Mostrar/ocultar tabs según login
+    if (!loggedIn) {
+      tabs.forEach(tab => {
+        if (tab.dataset.tab === 'profile') tab.style.display = 'none';
+        if (tab.dataset.tab === 'login') tab.style.display = 'inline-block';
+      });
+    } else {
+      tabs.forEach(tab => {
+        if (tab.dataset.tab === 'login') tab.style.display = 'none';
+        if (tab.dataset.tab === 'profile') tab.style.display = 'inline-block';
+      });
+    }
+  }
+
+  // Inicializar tabs
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabId = tab.dataset.tab;
+      if (!loggedIn && tabId === 'profile') return; // bloquea perfil si no logueado
+      if (tabId === 'login' && loggedIn) return; // bloquea login si ya logueado
+
+      // Si perfil y no logueado, no permite
+      if (tabId === 'profile' && !loggedIn) return;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      showSection(tabId);
+    });
+  });
+
+  // Modo oscuro
+  const darkToggle = document.getElementById('darkmode-toggle');
+  darkToggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark', darkToggle.checked);
+  });
+
+  // Login simulado
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    loggedIn = true;
+    // Cambiar tabs: quitar login, agregar perfil
+    document.querySelector('[data-tab="login"]').style.display = 'none';
+
+    // Crear boton perfil si no existe
+    let perfilTab = document.querySelector('[data-tab="profile"]');
+    if (!perfilTab) {
+      const perfilBtn = document.createElement('button');
+      perfilBtn.textContent = 'Mi Perfil';
+      perfilBtn.setAttribute('data-tab', 'profile');
+      perfilBtn.classList.add('active');
+      perfilBtn.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        perfilBtn.classList.add('active');
+        showSection('profile');
+      });
+      document.querySelector('.tabs').appendChild(perfilBtn);
+    }
+
+    // Actualizar pestañas activas
+    tabs.forEach(t => t.classList.remove('active'));
+    const perfilBtn2 = document.querySelector('[data-tab="profile"]');
+    perfilBtn2.classList.add('active');
+    showSection('profile');
+  });
+
+  // Cargar ranking top 10
   const topUsers = [
     { name: "Juan Pérez", score: 980 },
     { name: "Lucía Gómez", score: 950 },
@@ -48,102 +423,73 @@ export default function SaharaDemo() {
     { name: "Sofía Herrera", score: 760 },
   ];
 
-  const containerStyle = darkMode ? "bg-[#0d1b1e] text-white" : "bg-[#f9f6ef] text-[#1a1a1a]";
+  function renderRanking() {
+    const rankingList = document.getElementById('ranking-list');
+    rankingList.innerHTML = '';
+    topUsers.forEach((user, i) => {
+      const div = document.createElement('div');
+      div.className = 'ranking-item';
+      div.innerHTML = `
+        <div class="rank-number">${i + 1}</div>
+        <div class="user-name">${user.name}</div>
+        <div class="score">${user.score}</div>
+      `;
+      rankingList.appendChild(div);
+    });
+  }
+  renderRanking();
 
-  return (
-    <div className={`min-h-screen transition-colors duration-300 ${containerStyle} font-sans`}>
-      <div className="bg-[url('https://www.cervezacorona.com.ar/themes/custom/corona/img/home/hero.jpg')] bg-cover bg-center py-20 px-6 shadow-inner">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">Cerveza Sahara</h1>
-          <p className="mt-4 text-xl text-white/90">El oro del desierto. El lujo en tu copa.</p>
-        </div>
-      </div>
+  // Código de serie: sumar puntos y mostrar códigos
+  const codeForm = document.getElementById('code-form');
+  const codeInput = document.getElementById('code-input');
+  const userPointsEl = document.getElementById('user-points');
+  const codesList = document.getElementById('codes-list');
+  const codesListContainer = document.getElementById('codes-list-container');
+  const rewardsList = document.getElementById('rewards-list');
+  const rewardsListContainer = document.getElementById('rewards-list-container');
 
-      <div className="max-w-6xl mx-auto p-6">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-semibold">Explorá nuestra experiencia</h2>
-          <div className="flex items-center gap-2">
-            <span className="text-sm">Modo Oscuro</span>
-            <Switch checked={darkMode} onCheckedChange={() => setDarkMode(!darkMode)} />
-          </div>
-        </div>
+  codeForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const code = codeInput.value.trim().toUpperCase();
+    if (code && !codesEntered.includes(code)) {
+      codesEntered.push(code);
+      userPoints += 10;
+      userPointsEl.textContent = userPoints;
+      codeInput.value = '';
+      renderCodes();
+      checkRewards();
+    } else {
+      alert('Código inválido o ya ingresado.');
+    }
+  });
 
-        <Tabs value={tab} onValueChange={setTab}>
-          <TabsList className="grid grid-cols-4 gap-2 mb-6">
-            {!loggedIn && <TabsTrigger value="login">Iniciar sesión</TabsTrigger>}
-            {loggedIn && <TabsTrigger value="usuario">Mi Perfil</TabsTrigger>}
-            <TabsTrigger value="ranking">Top 10 Usuarios</TabsTrigger>
-            <TabsTrigger value="process">Proceso</TabsTrigger>
-            <TabsTrigger value="productos">Productos</TabsTrigger>
-          </TabsList>
+  function renderCodes() {
+    codesList.innerHTML = '';
+    codesEntered.forEach(code => {
+      const li = document.createElement('li');
+      li.textContent = code;
+      codesList.appendChild(li);
+    });
+    codesListContainer.style.display = codesEntered.length ? 'block' : 'none';
+  }
 
-          <AnimatePresence mode="wait">
-            {!loggedIn && tab === "login" && (
-              <TabsContent value="login" forceMount>
-                <motion.div key="login" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setLoggedIn(true);
-                      setTab("usuario");
-                    }}
-                    className="space-y-4 max-w-sm mx-auto"
-                  >
-                    <Input placeholder="Usuario" required />
-                    <Input type="password" placeholder="Contraseña" required />
-                    <Button type="submit" className="w-full bg-yellow-600 hover:bg-yellow-700 text-white">
-                      Iniciar Sesión
-                    </Button>
-                  </form>
-                </motion.div>
-              </TabsContent>
-            )}
+  function checkRewards() {
+    rewardsList.innerHTML = '';
+    rewards = [];
+    if (userPoints >= 250) rewards.push('1 cerveza gratis');
+    if (userPoints >= 300) rewards.push('Kit Sahara exclusivo');
+    if (rewards.length) {
+      rewardsListContainer.style.display = 'block';
+      rewards.forEach(r => {
+        const li = document.createElement('li');
+        li.textContent = r;
+        rewardsList.appendChild(li);
+      });
+    } else {
+      rewardsListContainer.style.display = 'none';
+    }
+  }
 
-            {loggedIn && tab === "usuario" && (
-              <TabsContent value="usuario" forceMount>
-                <motion.div key="usuario" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-                  <div className="max-w-xl mx-auto space-y-6">
-                    <div className="text-center">
-                      <h3 className="text-2xl font-bold">¡Bienvenido/a!</h3>
-                      <p className="text-lg">Tus puntos acumulados: <span className="font-semibold text-yellow-600">{userPoints}</span></p>
-                    </div>
-                    <form onSubmit={handleCodeSubmit} className="flex flex-col items-center space-y-3">
-                      <Input value={code} onChange={(e) => setCode(e.target.value)} placeholder="Ingresá tu código de serie" required />
-                      <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white">Cargar Código</Button>
-                    </form>
-
-                    {codeHistory.length > 0 && (
-                      <div>
-                        <h4 className="font-semibold mt-6">Códigos ingresados:</h4>
-                        <ul className="list-disc pl-6 text-sm mt-2">
-                          {codeHistory.map((c, i) => (
-                            <li key={i}>{c}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    {rewards.length > 0 && (
-                      <div>
-                        <h4 className="font-semibold mt-6">Recompensas obtenidas:</h4>
-                        <ul className="list-disc pl-6 text-sm mt-2 text-yellow-600">
-                          {rewards.map((r, i) => (
-                            <li key={i}>{r}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              </TabsContent>
-            )}
-
-            {/* Secciones existentes: ranking, process, productos */}
-
-            {/* ... (el resto del código permanece igual) */}
-          </AnimatePresence>
-        </Tabs>
-      </div>
-    </div>
-  );
-}
+</script>
+</body>
+</html>
