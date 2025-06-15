@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -7,6 +8,13 @@ body {
   background: #f9f6ef;
   color: #1a1a1a;
   font-family: 'Playfair Display', serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#main-content {
+  flex: 1;
 }
 
 .hero {
@@ -169,6 +177,112 @@ h2 {
   margin-top: 0;
 }
 
+/*-------------------------------------------------------------------------------------*/
+.brew-process {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.step img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.5s ease;
+}
+.step img:hover {
+  transform: scale(1.05);
+}
+.step p {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  color: #5a3921;
+  text-align: center;
+}
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.event-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  overflow: hidden;
+  text-align: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.event-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 4px solid #ffc107;
+}
+.event-card h3 {
+  color: #8a5a2d;
+  margin: 1rem 0 0.5rem;
+  font-size: 1.4rem;
+}
+.event-card p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+.event-card button {
+  background: #ffc107;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  align-self: center;
+}
+.event-card button:hover {
+  background: #e0a800;
+}
+.footer-banner {
+  background: #fff2cc;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #5a3921;
+  border-top: 1px solid #e0c27c;
+  width: 100%;
+}
+.footer-banner img {
+  width: 100px;
+  margin-bottom: 1rem;
+}
+
+
+.step {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.step:nth-child(1) { animation-delay: 0.2s; }
+.step:nth-child(2) { animation-delay: 0.4s; }
+.step:nth-child(3) { animation-delay: 0.6s; }
+.step:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/*-------------------------------------------------------------------------------------*/
+
 /* Responsive: ajustes para móviles */
 @media (max-width: 768px) {
   .hero h1 {
@@ -194,5 +308,13 @@ h2 {
   
   .ranking-entry {
     font-size: 0.9rem;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .brew-process {
+    grid-template-columns: 1fr;
   }
 }
