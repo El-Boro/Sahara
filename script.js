@@ -5,6 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const yesBtn = document.getElementById('yes-btn');
   const noBtn = document.getElementById('no-btn');
 
+  document.querySelectorAll('.event-card button').forEach(button => {
+  button.addEventListener('click', function() {
+    const link = this.getAttribute('data-link');
+    if (link) {
+      window.open(link, '_blank'); // Abre en nueva pestaña
+      // window.location.href = link; // Para abrir en la misma pestaña
+    }
+  });
+});
+
   // Manejar clic en "SÍ"
   yesBtn.addEventListener('click', () => {
     ageVerification.classList.add('hidden');
