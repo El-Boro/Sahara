@@ -113,9 +113,20 @@ button:hover {
 
 .map {
   width: 100%;
-  max-width: 600px;
+  max-width: none;
   display: block;
   margin: 2rem auto;
+}
+
+.production-map {
+  width: 100%;
+  height: 80%;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  object-fit: cover;
+  object-position: center;
+  min-height: 500px;
+  min-width: 500px;
 }
 
 @keyframes fadeIn {
@@ -181,7 +192,7 @@ h2 {
 .brew-process {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   margin-top: 2rem;
 }
 .step img {
