@@ -9,6 +9,46 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
+     .process-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .map-container {
+      position: relative;
+      height: 100%;
+    }
+    
+    .production-map {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      object-fit: cover;
+    }
+    
+    .map-description {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1rem;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    /* Ajustes para móviles */
+    @media (max-width: 768px) {
+      .process-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
     /* Pantalla de verificación de edad */
     #age-verification {
       position: fixed;
@@ -532,10 +572,15 @@
       </section>
 
       <section id="process" class="tab-content">
-      <h2>Proceso de Fabricación de Nuestra Cerveza</h2>
+    <h2>Proceso de Fabricación de Nuestra Cerveza</h2>
+    <div class="process-container">
       <div class="brew-process">
         <div class="step">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRY4EYxKMngg21F6mHl5K_50xEd1STt0IiaVA&s" alt="Molienda de malta">
+          <img src="https://www.revistachacra.com.ar/files/image/23/23491/5aea34a2ade8b_837_627!.webp?s=ffd11c96c836f6abadc0c73a5f809a0c&d=1715468750&oe=jpg" alt="Molienda de malta">
+          <p><strong>Producción de la cebada:</strong> Aprovechamos el clima ideal de la ciudad de Tandil para producir cebada de muy alta calidad a la par de aumentar la producción de la materia prima.</p>
+        </div>
+        <div class="step">
+          <img src="https://cervejaemalte.com.br/wp-content/uploads/2021/07/cropped-shot-of-a-bearded-brewer-holding-barley-seeds-working-at-his-beer-factory_Easy-Resize.com-1-1024x682.jpg" alt="Molienda de malta">
           <p><strong>Molienda:</strong> Se tritura la malta para liberar sus azúcares.</p>
         </div>
         <div class="step">
@@ -551,7 +596,14 @@
           <p><strong>Envasado:</strong> Se embotella la cerveza lista para disfrutar.</p>
         </div>
       </div>
-    </section>
+      <div class="map-container">
+        <img src="https://raw.githubusercontent.com/El-Boro/Sahara/main/assets/img/mapaargentina.jpg" alt="Mapa de producción" class="production-map">
+        <div class="map-description">
+          Aprovechamos las condiciones ideales de la ciudad de Tandil para producir la cerveza dorada más premium y la llevamos a los mejores destinos del país. 
+        </div>
+      </div>
+    </div>
+  </section>
 
     <section id="events" class="tab-content">
       <h2>Próximos Eventos</h2>
