@@ -144,4 +144,24 @@ document.addEventListener("DOMContentLoaded", () => {
       step.style.animation = '';
     });
   }
+
+  const followForm = document.getElementById("followForm");
+  const followCodeInput = document.getElementById("followCodeInput");
+
+  if (followForm) {
+    followForm.addEventListener("submit", (e) => {
+      e.preventDefault(); // evita el refresh
+      const code = followCodeInput.value.trim();
+
+      if (code !== "") {
+        // Oculta todas las secciones
+        document.querySelectorAll(".tab-content").forEach((section) => {
+          section.classList.remove("active");
+        });
+
+        // Muestra la sección de seguimiento
+        document.getElementById("tracking").classList.add("active");
+      }
+    });
+  }
 });

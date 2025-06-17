@@ -35,7 +35,8 @@
       <button data-tab="profile" class="hidden">Mi Perfil</button>
       <button data-tab="ranking">Top 10 Usuarios</button>
       <button data-tab="process">Nuestro Proceso</button>
-      <button data-tab="following">Seguí tu cerveza</button>
+      <button data-tab="followbeer">Seguí tu cerveza</button>
+      <button data-tab="tracking" class="hidden">Mi Perfil</button>
       <button data-tab="events">Próximos Eventos</button>
     </nav>
 
@@ -98,12 +99,49 @@
     </div>
   </section>
 
-  <section id="following" class="tab-content">
+  <section id="followbeer" class="tab-content">
       <h2>Seguí tu cerveza</h2>
-      <form id="codeForm">
-          <input type="text" id="codeInput" placeholder="Ingresá tu código" required />
-          <button type="submit">Cargar Código</button>
+      <form id="followForm">
+        <input type="text" id="followCodeInput" placeholder="Ingresá tu código" required />
+        <button type="submit">Cargar Código</button>
       </form>
+  </section>
+
+  <section id="tracking" class="tab-content">
+        <h2>¡Descubrí el recorrido de tu Sahara!</h2>
+          <div class="tracking-container">
+            <div class="tracking-step">
+              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/tandil.jpg?raw=true" alt="Inicio en Tandil">
+              <div>
+                <h3>1. Inicio en Tandil</h3>
+                <p>Tu cerveza Sahara comienza su viaje en nuestra planta de elaboración artesanal en Tandil, donde se seleccionan los mejores granos.</p>
+              </div>
+            </div>
+
+            <div class="tracking-step">
+              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/planta.jpg?raw=true" alt="Control de calidad">
+              <div>
+                <h3>2. Control de Calidad</h3>
+                <p>Antes de salir de nuestra fábrica, cada lote pasa por rigurosos controles de calidad que aseguran su sabor y pureza únicos.</p>
+              </div>
+            </div>
+
+            <div class="tracking-step">
+              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/distribucion.jpg?raw=true" alt="Distribución nacional">
+              <div>
+                <h3>3. Distribución Nacional</h3>
+                <p>La cerveza es transportada en condiciones óptimas hacia distintos puntos del país, respetando la cadena de frío.</p>
+              </div>
+            </div>
+
+            <div class="tracking-step">
+              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/consumo.jpg?raw=true" alt="Destino final">
+              <div>
+                <h3>4. Tu mesa</h3>
+                <p>Finalmente, llega hasta vos. Ya sea en bares premium, festivales o desde tu casa, cada Sahara cuenta una historia de origen.</p>
+              </div>
+            </div>
+          </div>
   </section>
 
   <section id="events" class="tab-content">
