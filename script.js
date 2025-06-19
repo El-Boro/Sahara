@@ -164,4 +164,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  const dateSpan = document.getElementById("delivery-date");
+  if (dateSpan) {
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString("es-AR", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    });
+    dateSpan.textContent = formattedDate;
+  }
+
+  const saharaTitle = document.getElementById("sahara-title");
+  const allTabs = document.querySelectorAll(".tab-content");
+
+  saharaTitle.addEventListener("click", () => {
+    allTabs.forEach(tab => tab.classList.remove("active"));
+    document.getElementById("firstscreen").classList.add("active");
+  });
 });

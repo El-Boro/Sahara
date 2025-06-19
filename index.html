@@ -1,180 +1,352 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sahara</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <!-- Pantalla de verificación de edad -->
-  <div id="age-verification">
-    <div class="verification-container">
-      <div class="verification-logo"></div>
-      <h1 class="verification-title">¿SOS MAYOR DE 18 AÑOS?</h1>
-      <p class="verification-subtitle">Para acceder a nuestro sitio, debes ser mayor de edad. El consumo de alcohol es perjudicial para la salud. Bebé con moderación.</p>
-      <div class="verification-buttons">
-        <button id="yes-btn" class="verification-btn">SÍ</button>
-        <button id="no-btn" class="verification-btn">NO</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contenido principal (inicialmente oculto) -->
-  <div id="main-content">
-    <header class="hero">
-      <h1>Sahara</h1>
-      <p>El oro del desierto. El lujo en tu copa.</p>
-    </header>
-
-    <nav class="tabs">
-      <button data-tab="login">Iniciar sesión</button>
-      <button data-tab="profile" class="hidden">Mi Perfil</button>
-      <button data-tab="ranking">Top 10 Usuarios</button>
-      <button data-tab="process">Nuestro Proceso</button>
-      <button data-tab="followbeer">Seguí tu cerveza</button>
-      <button data-tab="tracking" class="hidden">Mi Perfil</button>
-      <button data-tab="events">Próximos Eventos</button>
-    </nav>
-
-    <main>
-      <section id="login" class="tab-content active">
-        <form id="loginForm">
-          <input type="text" placeholder="Usuario" required />
-          <input type="password" placeholder="Contraseña" required />
-          <button type="submit">Iniciar sesión</button>
-        </form>
-      </section>
-
-      <section id="profile" class="tab-content">
-        <h2>Bienvenido/a</h2>
-        <p style="text-align: center; font-size: 1.2rem;">Puntos acumulados: <span id="points" style="font-weight: bold; color: #8a5a2d;">240</span></p>
-        <form id="codeForm">
-          <input type="text" id="codeInput" placeholder="Ingresá tu código" required />
-          <button type="submit">Cargar Código</button>
-        </form>
-        <div id="codeList"></div>
-        <div id="rewardsList"></div>
-      </section>
-
-      <section id="ranking" class="tab-content">
-        <h2>Top 10 Usuarios</h2>
-        <div id="rankingList"></div>
-      </section>
-
-      <section id="process" class="tab-content">
-    <h2>Proceso de Fabricación de Nuestra Cerveza</h2>
-    <div class="process-container">
-      <div class="brew-process">
-        <div class="step">
-          <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/cosechamalta.jpg?raw=true" alt="Molienda de malta">
-          <p><strong>Producción de la cebada:</strong> Aprovechamos el clima ideal de la ciudad de Tandil para producir cebada de muy alta calidad a la par de aumentar la producción de la materia prima.</p>
-        </div>
-        <div class="step">
-          <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/moliendamalta.jpg?raw=true" alt="Molienda de malta">
-          <p><strong>Molienda:</strong> Trituramos la malta con equipo especializado a la par que integramos tecnología IoT para llevar registros exactos que aseguren calidad premium en la producción..</p>
-        </div>
-        <div class="step">
-          <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/coccionmalta.jpg?raw=true" alt="Cocción de mosto">
-          <p><strong>Cocción:</strong> Hervimos el lúpulo a la temperatura justa y llevamos control exacto de humedad y cocción.</p>
-        </div>
-        <div class="step">
-          <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/fermentacionmalta.jpg?raw=true" alt="Fermentación de cerveza">
-          <p><strong>Fermentación:</strong> Dejamos que las levaduras transforman los azúcares en alcohol.</p>
-        </div>
-        <div class="step">
-          <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/envasadomalta.avif?raw=true" alt="Envasado de cerveza">
-          <p><strong>Envasado:</strong> Embotellamos la cerveza lista para disfrutar. No te olvides de cargar tu código para no perderte los eventos exclusivos.</p>
-        </div>
-      </div>
-      <div class="map-container">
-        <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/mapaargentina.jpg?raw=true" alt="Mapa de producción" class="production-map">
-        <div class="map-description">
-          Aprovechamos las condiciones ideales de la ciudad de Tandil para producir la cerveza dorada más premium y la llevamos a los mejores destinos del país. 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sahara</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Pantalla de verificación de edad -->
+    <div id="age-verification">
+      <div class="verification-container">
+        <div class="verification-logo"></div>
+        <h1 class="verification-title">¿SOS MAYOR DE 18 AÑOS?</h1>
+        <p class="verification-subtitle">
+          Para acceder a nuestro sitio, debes ser mayor de edad. El consumo de
+          alcohol es perjudicial para la salud. Bebé con moderación.
+        </p>
+        <div class="verification-buttons">
+          <button id="yes-btn" class="verification-btn">SÍ</button>
+          <button id="no-btn" class="verification-btn">NO</button>
         </div>
       </div>
     </div>
-  </section>
 
-  <section id="followbeer" class="tab-content">
-      <h2>Seguí tu cerveza</h2>
-      <form id="followForm">
-        <input type="text" id="followCodeInput" placeholder="Ingresá tu código" required />
-        <button type="submit">Cargar Código</button>
-      </form>
-  </section>
+    <!-- Contenido principal (inicialmente oculto) -->
+    <div id="main-content">
+      <header class="hero">
+        <h1 id="sahara-title" style="cursor: pointer;">Sahara</h1>
+        <p>El oro del desierto. El lujo en tu copa.</p>
+      </header>
 
-  <section id="tracking" class="tab-content">
-        <h2>¡Descubrí el recorrido de tu Sahara!</h2>
-          <div class="tracking-container">
-            <div class="tracking-step">
-              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/tandil.jpg?raw=true" alt="Inicio en Tandil">
-              <div>
-                <h3>1. Inicio en Tandil</h3>
-                <p>Tu cerveza Sahara comienza su viaje en nuestra planta de elaboración artesanal en Tandil, donde se seleccionan los mejores granos.</p>
+      <nav class="tabs">
+        <button data-tab="login">Iniciar sesión</button>
+        <button data-tab="profile" class="hidden">Mi Perfil</button>
+        <button data-tab="ranking">Top 10 Usuarios</button>
+        <button data-tab="process">Nuestro Proceso</button>
+        <button data-tab="followbeer">Seguí tu cerveza</button>
+        <button data-tab="tracking" class="hidden">Mi Perfil</button>
+        <button data-tab="events">Próximos Eventos</button>
+      </nav>
+
+      <main>
+        <section id="firstscreen" class="tab-content active">
+          <div class="splash-screen">
+            <div class="carousel-container">
+              <div class="carousel-track">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEZ1SKDtse9j6IXr5N-Z65gKm-wg9P3I1hMg&s" alt="Cerveza 1" />
+                <img src="https://www.republicacervecerashop.com.mx/cdn/shop/articles/cerveza-artesanal_1600x.jpg?v=1703130948" alt="Cerveza 2" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdX-IhD1GyduXiSKBpDoiStv5sCPhMZuMjHg&s" alt="Cerveza 3" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA-usyISLS65O_RplJQ6qyeRmcbodqw7OxTw&s" alt="Cerveza 4" />
+              
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEZ1SKDtse9j6IXr5N-Z65gKm-wg9P3I1hMg&s" alt="Cerveza 1" />
+                <img src="https://www.republicacervecerashop.com.mx/cdn/shop/articles/cerveza-artesanal_1600x.jpg?v=1703130948" alt="Cerveza 2" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdX-IhD1GyduXiSKBpDoiStv5sCPhMZuMjHg&s" alt="Cerveza 3" />
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA-usyISLS65O_RplJQ6qyeRmcbodqw7OxTw&s" alt="Cerveza 4" />
               </div>
             </div>
+            <div class="luxury-message">
+              <h1>El lujo que nace en la calle</h1>
+              <p>Elegancia rebelde, sabor sin reglas.</p>
+            </div>
+          </div>
+        </section>
 
-            <div class="tracking-step">
-              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/planta.jpg?raw=true" alt="Control de calidad">
-              <div>
-                <h3>2. Control de Calidad</h3>
-                <p>Antes de salir de nuestra fábrica, cada lote pasa por rigurosos controles de calidad que aseguran su sabor y pureza únicos.</p>
+        <section id="login" class="tab-content">
+          <form id="loginForm">
+            <input type="text" placeholder="Usuario" required />
+            <input type="password" placeholder="Contraseña" required />
+            <button type="submit">Iniciar sesión</button>
+          </form>
+        </section>
+
+        <section id="profile" class="tab-content">
+          <h2>Bienvenido/a</h2>
+          <p style="text-align: center; font-size: 1.2rem">
+            Puntos acumulados:
+            <span id="points" style="font-weight: bold; color: #8a5a2d"
+              >240</span
+            >
+          </p>
+          <form id="codeForm">
+            <input
+              type="text"
+              id="codeInput"
+              placeholder="Ingresá tu código"
+              required
+            />
+            <button type="submit">Cargar Código</button>
+          </form>
+          <div id="codeList"></div>
+          <div id="rewardsList"></div>
+        </section>
+
+        <section id="ranking" class="tab-content">
+          <h2>Top 10 Usuarios</h2>
+          <div id="rankingList"></div>
+        </section>
+
+        <section id="process" class="tab-content">
+          <h2>Proceso de Fabricación de Nuestra Cerveza</h2>
+          <div class="process-container">
+            <div class="brew-process">
+              <div class="step">
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/cosechamalta.jpg?raw=true"
+                  alt="Molienda de malta"
+                />
+                <p>
+                  <strong>Producción de la cebada:</strong> Aprovechamos el
+                  clima ideal de la ciudad de Tandil para producir cebada de muy
+                  alta calidad a la par de aumentar la producción de la materia
+                  prima.
+                </p>
+              </div>
+              <div class="step">
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/moliendamalta.jpg?raw=true"
+                  alt="Molienda de malta"
+                />
+                <p>
+                  <strong>Molienda:</strong> Trituramos la malta con equipo
+                  especializado a la par que integramos tecnología IoT para
+                  llevar registros exactos que aseguren calidad premium en la
+                  producción..
+                </p>
+              </div>
+              <div class="step">
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/coccionmalta.jpg?raw=true"
+                  alt="Cocción de mosto"
+                />
+                <p>
+                  <strong>Cocción:</strong> Hervimos el lúpulo a la temperatura
+                  justa y llevamos control exacto de humedad y cocción.
+                </p>
+              </div>
+              <div class="step">
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/fermentacionmalta.jpg?raw=true"
+                  alt="Fermentación de cerveza"
+                />
+                <p>
+                  <strong>Fermentación:</strong> Dejamos que las levaduras
+                  transforman los azúcares en alcohol.
+                </p>
+              </div>
+              <div class="step">
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/envasadomalta.avif?raw=true"
+                  alt="Envasado de cerveza"
+                />
+                <p>
+                  <strong>Envasado:</strong> Embotellamos la cerveza lista para
+                  disfrutar. No te olvides de cargar tu código para no perderte
+                  los eventos exclusivos.
+                </p>
               </div>
             </div>
-
-            <div class="tracking-step">
-              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/distribucion.jpg?raw=true" alt="Distribución nacional">
-              <div>
-                <h3>3. Distribución Nacional</h3>
-                <p>La cerveza es transportada en condiciones óptimas hacia distintos puntos del país, respetando la cadena de frío.</p>
-              </div>
-            </div>
-
-            <div class="tracking-step">
-              <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/consumo.jpg?raw=true" alt="Destino final">
-              <div>
-                <h3>4. Tu mesa</h3>
-                <p>Finalmente, llega hasta vos. Ya sea en bares premium, festivales o desde tu casa, cada Sahara cuenta una historia de origen.</p>
+            <div class="map-container">
+              <img
+                src="https://github.com/El-Boro/Sahara/blob/main/assets/img/mapaargentina.jpg?raw=true"
+                alt="Mapa de producción"
+                class="production-map"
+              />
+              <div class="map-description">
+                Aprovechamos las condiciones ideales de la ciudad de Tandil para
+                producir la cerveza dorada más premium y la llevamos a los
+                mejores destinos del país.
               </div>
             </div>
           </div>
-  </section>
+        </section>
 
-  <section id="events" class="tab-content">
-    <h2>Próximos Eventos</h2>
-      <div class="events-grid">
-        <div class="event-card">
-          <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/eventoesqui.png?raw=true" alt="Evento de esquí">
-          <h3>Festival de Cerveza en Bariloche</h3>
-          <p>Un encuentro entre la nieve y la cerveza. Degustaciones, DJ en vivo y más.</p>
-          <button data-link="https://www.instagram.com/festivaldelacervezabrc/?hl=es">Ver evento</button>
-        </div>
-        <div class="event-card">
-          <img src="https://resizer.glanacion.com/resizer/v2/las-fiestas-bresh-empezaron-en-2016-y-en-solo-GSEJ6PUTJRCWZBM63L43IF6QBE.jpg?auth=cc09d1cea92f8c7d0dd70bdd04b19e6ae640db66bcc6f0f9ea1f129d8d35c662&width=1920&height=1280&quality=70&smart=true" alt="Bresh Mar del Plata">
-          <h3>Sahara en Bresh Mar del Plata</h3>
-          <p>Nos sumamos a la fiesta más icónica del verano con barra exclusiva.</p>
-          <button data-link="https://www.fiestabresh.com/">Ver evento</button>
-        </div>
-        <div class="event-card">
-          <img src="https://turuguay.mactravel.com.uy/wp-content/uploads/2025/03/93.jpg" alt="Montevideo">
-          <h3>Tour Cerveza Montevideo</h3>
-          <p>Recorrido cervecero por la ciudad vieja con música y gastronomía local.</p>
-          <button data-link="https://uruguaycitytour.com/producto/tour-de-bares/">Ver evento</button>
-        </div>
-      </div>
-    </section>
-  </main>
-  </div>
+        <section id="followbeer" class="tab-content">
+          <h2>Seguí tu cerveza</h2>
+          <form id="followForm">
+            <input
+              type="text"
+              id="followCodeInput"
+              placeholder="Ingresá tu código"
+              required
+            />
+            <button type="submit">Cargar Código</button>
+          </form>
+        </section>
 
-  <footer class="footer-banner">
-    <img src="https://raw.githubusercontent.com/El-Boro/Sahara/main/assets/img/logotransparente.png" alt="Logo Sahara">
-    <p>®️2025 Sahara - Tandil - Argentina. Todos los derechos reservados.<br>BEBER CON MODERACIÓN. PROHIBIDA SU VENTA A MENORES DE 18 AÑOS. NO COMPARTA EL CONTENIDO CON MENORES.</p>
-  </footer>
+        <section id="tracking" class="tab-content">
+          <h2>¡Descubrí el recorrido de tu Sahara!</h2>
+          <div class="tracking-container">
+            <div class="tracking-step">
+              <img
+                src="https://github.com/El-Boro/Sahara/blob/main/assets/img/tandil.jpg?raw=true"
+                alt="Inicio en Tandil"
+              />
+              <div class="tracking-text">
+                <h3>1. Inicio en Tandil</h3>
+                <p>
+                  Tu cerveza Sahara comienza su viaje en nuestra planta de
+                  elaboración artesanal en Tandil, donde se seleccionan los
+                  mejores granos.
+                </p>
+              </div>
+              <a
+                class="tracking-map-link"
+                href="https://www.google.com/maps?q=Tandil,+Buenos+Aires,+Argentina"
+                target="_blank"
+                title="Ver en Google Maps"
+              ></a>
+            </div>
 
-  <script src="script.js"></script>
-</body>
+            <div class="tracking-step">
+              <img
+                src="https://github.com/El-Boro/Sahara/blob/main/assets/img/planta.jpg?raw=true"
+                alt="Control de calidad"
+              />
+              <div class="tracking-text">
+                <h3>2. Control de Calidad</h3>
+                <p>
+                  Antes de salir de nuestra fábrica, cada lote pasa por
+                  rigurosos controles de calidad que aseguran su sabor y pureza
+                  únicos.
+                </p>
+              </div>
+              <a
+                class="tracking-map-link"
+                href="https://www.google.com/maps?q=Tandil,+Buenos+Aires,+Argentina"
+                target="_blank"
+                title="Ver en Google Maps"
+              ></a>
+            </div>
+
+            <div class="tracking-step">
+              <img
+                src="https://github.com/El-Boro/Sahara/blob/main/assets/img/distribucion.jpg?raw=true"
+                alt="Distribución nacional"
+              />
+              <div class="tracking-text">
+                <h3>3. Distribución Nacional</h3>
+                <p>
+                  La cerveza es transportada en condiciones óptimas hacia
+                  distintos puntos del país, respetando la cadena de frío.
+                </p>
+              </div>
+              <a
+                class="tracking-map-link"
+                href="https://www.google.com/maps?q=Tandil,+Buenos+Aires,+Argentina"
+                target="_blank"
+                title="Ver en Google Maps"
+              ></a>
+            </div>
+
+            <div class="tracking-step">
+              <img
+                src="https://github.com/El-Boro/Sahara/blob/main/assets/img/consumo.jpg?raw=true"
+                alt="Destino final"
+              />
+              <div class="tracking-text">
+                <h3>4. Tu mesa</h3>
+                <p>
+                  Finalmente, llega hasta vos. Ya sea en Mar del Plata, Uruguay
+                  o la Cordillera, cada Sahara cuenta una historia de origen.
+                  <br /><strong>Fecha de entrega:</strong>
+                  <span id="delivery-date"></span>
+                </p>
+              </div>
+              <a
+                class="tracking-map-link"
+                href="https://www.google.com/maps?q=Tandil,+Buenos+Aires,+Argentina"
+                target="_blank"
+                title="Ver en Google Maps"
+              ></a>
+            </div>
+          </div>
+        </section>
+
+        <section id="events" class="tab-content">
+          <h2>Próximos Eventos</h2>
+          <div class="events-grid">
+            <div class="event-card">
+              <img
+                src="https://github.com/El-Boro/Sahara/blob/main/assets/img/eventoesqui.png?raw=true"
+                alt="Evento de esquí"
+              />
+              <h3>Festival de Cerveza en Bariloche</h3>
+              <p>
+                Un encuentro entre la nieve y la cerveza. Degustaciones, DJ en
+                vivo y más.
+              </p>
+              <button
+                data-link="https://www.instagram.com/festivaldelacervezabrc/?hl=es"
+              >
+                Ver evento
+              </button>
+            </div>
+            <div class="event-card">
+              <img
+                src="https://resizer.glanacion.com/resizer/v2/las-fiestas-bresh-empezaron-en-2016-y-en-solo-GSEJ6PUTJRCWZBM63L43IF6QBE.jpg?auth=cc09d1cea92f8c7d0dd70bdd04b19e6ae640db66bcc6f0f9ea1f129d8d35c662&width=1920&height=1280&quality=70&smart=true"
+                alt="Bresh Mar del Plata"
+              />
+              <h3>Sahara en Bresh Mar del Plata</h3>
+              <p>
+                Nos sumamos a la fiesta más icónica del verano con barra
+                exclusiva.
+              </p>
+              <button data-link="https://www.fiestabresh.com/">
+                Ver evento
+              </button>
+            </div>
+            <div class="event-card">
+              <img
+                src="https://turuguay.mactravel.com.uy/wp-content/uploads/2025/03/93.jpg"
+                alt="Montevideo"
+              />
+              <h3>Tour Cerveza Montevideo</h3>
+              <p>
+                Recorrido cervecero por la ciudad vieja con música y gastronomía
+                local.
+              </p>
+              <button
+                data-link="https://uruguaycitytour.com/producto/tour-de-bares/"
+              >
+                Ver evento
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer-banner">
+      <img
+        src="https://raw.githubusercontent.com/El-Boro/Sahara/main/assets/img/logotransparente.png"
+        alt="Logo Sahara"
+      />
+      <p>
+        ®️2025 Sahara - Tandil - Argentina. Todos los derechos reservados.<br />BEBER
+        CON MODERACIÓN. PROHIBIDA SU VENTA A MENORES DE 18 AÑOS. NO COMPARTA EL
+        CONTENIDO CON MENORES.
+      </p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>
