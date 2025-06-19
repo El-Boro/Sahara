@@ -640,7 +640,7 @@ h2::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #b8875f;
+  background-color: #088ae0;
   border-radius: 0 12px 12px 0;
   text-decoration: none;
   transition: background-color 0.3s ease;
@@ -711,7 +711,7 @@ h2::after {
 .carousel-track {
   display: flex;
   width: max-content;
-  animation: scroll 30s linear infinite;
+  animation: scroll 45s linear infinite;
 }
 
 .carousel-track img {
@@ -719,7 +719,7 @@ h2::after {
   height: 100vh;
   object-fit: cover;
   flex-shrink: 0;
-  filter: brightness(0.5);
+  filter: brightness(0.7);
 }
 
  @keyframes scroll {
