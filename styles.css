@@ -796,6 +796,13 @@ h4 {
   text-align: center;
 }
 
+#check-dni-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 /* Responsive: ajustes para móviles */
 @media (max-width: 768px) {
   .verification-container {
