@@ -803,6 +803,58 @@ h4 {
   text-align: center;
 }
 
+.ranking-columns {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin: 1rem auto; /* centrado horizontal */
+  align-items: start;
+  max-width: 1000px;   /* o lo que prefieras */
+}
+
+.my-ranking {
+  background: #fffbe6;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.my-ranking h3 {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #8a5a2d;
+  margin-bottom: 1rem;
+}
+
+.top10usuarios {
+  background: #fffbe6;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  max-width: 670px;
+}
+
+.top10usuarios h3 {
+  text-align: center;
+  font-size: 2rem;
+  color: #8a5a2d;
+  margin-bottom: 1rem;
+}
+
+.ranking-entry.destacado {
+  background: linear-gradient(to right, #ffcc80, #ffe0b2);
+  font-size: 1.1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+#user-position {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #5a3921;
+  font-size: 1.05rem;
+}
+
 /* Responsive: ajustes para móviles */
 @media (max-width: 768px) {
   .verification-container {

@@ -57,7 +57,7 @@
       <nav class="tabs">
         <button data-tab="login">Iniciar sesión</button>
         <button data-tab="profile" class="hidden">Mi Perfil</button>
-        <button data-tab="ranking">Top 10 Usuarios</button>
+        <button data-tab="ranking">Ranking</button>
         <button data-tab="process">Nuestro Proceso</button>
         <button data-tab="followbeer">Seguí tu Cerveza</button>
         <button data-tab="tracking" class="hidden">Mi Perfil</button>
@@ -116,7 +116,7 @@
 
         <section id="login" class="tab-content">
           <form id="loginForm">
-            <input type="text" placeholder="Usuario" required />
+            <input type="text" id="usernameInput" placeholder="Usuario" required />
             <input type="password" placeholder="Contraseña" required />
             <button type="submit">Iniciar sesión</button>
           </form>
@@ -144,8 +144,27 @@
         </section>
 
         <section id="ranking" class="tab-content">
-          <h2>Top 10 Usuarios</h2>
-          <div id="rankingList"></div>
+          <h2>Ranking</h2>
+          <div class="ranking-columns">
+            <div class="my-ranking">
+              <h3>Mi Posición en el Ranking</h3>
+              <div class="ranking-entry destacado">
+                <span id="ranking-user-name">Nombre</span>
+                <span id="ranking-user-points">0 pts</span>
+              </div>
+                <p id="user-position" style="text-align: center; margin-top: 1rem; color: #5a3921; font-weight: bold;">
+                  <strong>Se encuentra en la posición #301</strong>
+                  <br />
+                   <br />Por estar en el top 500 participa por entradas para la Bresh en Mar del Plata.
+                </p>
+            </div>
+            <div class="top10usuarios"> 
+              <h3>Top 10 Usuarios</h3>
+               <div class="top10 destacado">
+                <div id="rankingList"></div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section id="process" class="tab-content">
