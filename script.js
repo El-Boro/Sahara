@@ -1,35 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Elementos de la verificación de edad
-  const ageVerification = document.getElementById('age-verification');
-  const mainContent = document.getElementById('main-content');
-  const yesBtn = document.getElementById('yes-btn');
-  const noBtn = document.getElementById('no-btn');
+  const ageVerification = document.getElementById("age-verification");
+  const mainContent = document.getElementById("main-content");
 
-  document.querySelectorAll('.event-card button').forEach(button => {
-  button.addEventListener('click', function() {
-    const link = this.getAttribute('data-link');
-    if (link) {
-      window.open(link, '_blank'); // Abre en nueva pestaña
-      // window.location.href = link; // Para abrir en la misma pestaña
-    }
+  document.querySelectorAll(".event-card button").forEach((button) => {
+    button.addEventListener("click", function () {
+      const link = this.getAttribute("data-link");
+      if (link) {
+        window.open(link, "_blank"); // Abre en nueva pestaña
+        // window.location.href = link; // Para abrir en la misma pestaña
+      }
+    });
   });
-});
 
   // Manejar clic en "SÍ"
-  yesBtn.addEventListener('click', () => {
-    ageVerification.classList.add('hidden');
-    setTimeout(() => {
-      mainContent.style.display = 'block';
-      document.body.classList.add('age-verified');
-    }, 800);
-  });
+  const checkDniBtn = document.getElementById("check-dni-btn");
+  const dniInput = document.getElementById("dni-input");
 
-  // Manejar clic en "NO"
-  noBtn.addEventListener('click', () => {
-    ageVerification.classList.add('hidden');
-    setTimeout(() => {
-      window.location.href = 'https://www.tapintoyourbeer.com/agegate?destination=';
-    }, 800);
+  checkDniBtn.addEventListener("click", () => {
+    const dniStr = dniInput.value.trim();
+    const dni = parseInt(dniStr, 10);
+
+    if (!isNaN(dni) && dniStr.length >= 7 && dniStr.length <= 8) {
+      if (dni >= 48000000) {
+        ageVerification.classList.add("hidden");
+        setTimeout(() => {
+          window.location.href =
+            "https://www.tapintoyourbeer.com/agegate?destination=";
+        }, 800);
+      } else {
+        ageVerification.classList.add("hidden");
+        setTimeout(() => {
+          mainContent.style.display = "block";
+          document.body.classList.add("age-verified");
+        }, 800);
+      }
+    } else {
+      alert("Por favor ingresá un número de DNI válido de 7 u 8 cifras.");
+    }
   });
 
   // Resto del código de la aplicación
@@ -43,10 +51,10 @@ document.addEventListener("DOMContentLoaded", () => {
     tab.addEventListener("click", () => {
       // Desactivar todas las pestañas
       contents.forEach((content) => content.classList.remove("active"));
-      
+
       // Activar la pestaña seleccionada
       document.getElementById(tab.dataset.tab).classList.add("active");
-      
+
       // Reiniciar animaciones para la pestaña de proceso
       if (tab.dataset.tab === "process") {
         restartProcessAnimations();
@@ -67,40 +75,46 @@ document.addEventListener("DOMContentLoaded", () => {
   let userPoints = 240;
   const rewards = [];
   const codeList = [];
-  
+
   // Manejo de códigos
   document.getElementById("codeForm").addEventListener("submit", (e) => {
     e.preventDefault();
     const input = document.getElementById("codeInput");
     const code = input.value.trim().toUpperCase();
-    
-    if (code.length >= 5 && /^[A-Z0-9]+$/.test(code) && !codeList.includes(code)) {
+
+    if (
+      code.length >= 5 &&
+      /^[A-Z0-9]+$/.test(code) &&
+      !codeList.includes(code)
+    ) {
       userPoints += 10;
       codeList.push(code);
       document.getElementById("points").textContent = userPoints;
-      
+
       document.getElementById("codeList").innerHTML = `
         <h3>Códigos ingresados:</h3>
-        <ul>${codeList.map(c => `<li>${c}</li>`).join("")}</ul>
+        <ul>${codeList.map((c) => `<li>${c}</li>`).join("")}</ul>
       `;
-      
+
       if (userPoints >= 250 && !rewards.includes("1 cerveza gratis")) {
         rewards.push("1 cerveza gratis");
       }
       if (userPoints >= 300 && !rewards.includes("Kit Sahara exclusivo")) {
         rewards.push("Kit Sahara exclusivo");
       }
-      
+
       if (rewards.length > 0) {
         document.getElementById("rewardsList").innerHTML = `
           <h3>Recompensas:</h3>
-          <ul>${rewards.map(r => `<li>${r}</li>`).join("")}</ul>
+          <ul>${rewards.map((r) => `<li>${r}</li>`).join("")}</ul>
         `;
       }
     } else {
-      alert("Código inválido o ya ingresado. Por favor ingrese un código válido de al menos 5 caracteres alfanuméricos.");
+      alert(
+        "Código inválido o ya ingresado. Por favor ingrese un código válido de al menos 5 caracteres alfanuméricos."
+      );
     }
-    
+
     input.value = "";
   });
 
@@ -118,30 +132,34 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "Martín Ruiz", score: 780 },
     { name: "Sofía Herrera", score: 760 },
   ];
-  
+
   if (rankingList) {
-    rankingList.innerHTML = rankingData.map(user => `
+    rankingList.innerHTML = rankingData
+      .map(
+        (user) => `
       <div class="ranking-entry">
         <span>${user.name}</span>
         <span>${user.score} pts</span>
       </div>
-    `).join("");
+    `
+      )
+      .join("");
   }
 
   // Función para reiniciar animaciones del proceso
   function restartProcessAnimations() {
-    const steps = document.querySelectorAll('.step');
-    steps.forEach(step => {
+    const steps = document.querySelectorAll(".step");
+    steps.forEach((step) => {
       // Resetear animación
-      step.style.animation = 'none';
-      step.style.opacity = '0';
-      step.style.transform = 'translateY(20px)';
-      
+      step.style.animation = "none";
+      step.style.opacity = "0";
+      step.style.transform = "translateY(20px)";
+
       // Forzar reflow
       void step.offsetWidth;
-      
+
       // Reactivar animación con retrasos
-      step.style.animation = '';
+      step.style.animation = "";
     });
   }
 
@@ -171,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const formattedDate = today.toLocaleDateString("es-AR", {
       year: "numeric",
       month: "long",
-      day: "numeric"
+      day: "numeric",
     });
     dateSpan.textContent = formattedDate;
   }
@@ -180,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const allTabs = document.querySelectorAll(".tab-content");
 
   saharaTitle.addEventListener("click", () => {
-    allTabs.forEach(tab => tab.classList.remove("active"));
+    allTabs.forEach((tab) => tab.classList.remove("active"));
     document.getElementById("firstscreen").classList.add("active");
   });
 });

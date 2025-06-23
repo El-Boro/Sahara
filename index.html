@@ -10,7 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
       rel="stylesheet"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -24,8 +27,22 @@
           alcohol es perjudicial para la salud. Bebé con moderación.
         </p>
         <div class="verification-buttons">
-          <button id="yes-btn" class="verification-btn">SÍ</button>
-          <button id="no-btn" class="verification-btn">NO</button>
+          <input
+            id="dni-input"
+            type="number"
+            placeholder="Ingresá tu DNI"
+            class="verification-btn"
+            style="width: 100%; text-align: center"
+            minlength="7"
+            maxlength="8"
+          />
+          <button
+            id="check-dni-btn"
+            class="verification-btn"
+            style="margin-top: 1rem; text-align: center"
+          >
+            Continuar
+          </button>
         </div>
       </div>
     </div>
@@ -33,7 +50,7 @@
     <!-- Contenido principal (inicialmente oculto) -->
     <div id="main-content">
       <header class="hero">
-        <h1 id="sahara-title" style="cursor: pointer;">Sahara</h1>
+        <h1 id="sahara-title" style="cursor: pointer">Sahara</h1>
         <p>El oro del desierto. El lujo en tu copa.</p>
       </header>
 
@@ -52,20 +69,47 @@
           <div class="splash-screen">
             <div class="carousel-container">
               <div class="carousel-track">
-                <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/saharaplaya.png?raw=true" alt="Cerveza 1" />
-                <img src="https://www.republicacervecerashop.com.mx/cdn/shop/articles/cerveza-artesanal_1600x.jpg?v=1703130948" alt="Cerveza 2" />
-                <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/hamilton.png?raw=true" alt="Cerveza 3" />
-                <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/imagengrupal.png?raw=true" alt="Cerveza 4" />
-              
-                <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/saharaplaya.png?raw=true" alt="Cerveza 1" />
-                <img src="https://www.republicacervecerashop.com.mx/cdn/shop/articles/cerveza-artesanal_1600x.jpg?v=1703130948" alt="Cerveza 2" />
-                <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/hamilton.png?raw=true" alt="Cerveza 3" />
-                <img src="https://github.com/El-Boro/Sahara/blob/main/assets/img/imagengrupal.png?raw=true" alt="Cerveza 4" />
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/saharaplaya.png?raw=true"
+                  alt="Cerveza 1"
+                />
+                <img
+                  src="https://www.republicacervecerashop.com.mx/cdn/shop/articles/cerveza-artesanal_1600x.jpg?v=1703130948"
+                  alt="Cerveza 2"
+                />
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/hamilton.png?raw=true"
+                  alt="Cerveza 3"
+                />
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/imagengrupal.png?raw=true"
+                  alt="Cerveza 4"
+                />
+
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/saharaplaya.png?raw=true"
+                  alt="Cerveza 1"
+                />
+                <img
+                  src="https://www.republicacervecerashop.com.mx/cdn/shop/articles/cerveza-artesanal_1600x.jpg?v=1703130948"
+                  alt="Cerveza 2"
+                />
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/hamilton.png?raw=true"
+                  alt="Cerveza 3"
+                />
+                <img
+                  src="https://github.com/El-Boro/Sahara/blob/main/assets/img/imagengrupal.png?raw=true"
+                  alt="Cerveza 4"
+                />
               </div>
             </div>
             <div class="luxury-message">
               <h1>LUJO QUE NACE EN TANDIL Y LLEGA A TU VIDA.</h1>
-              <p>Vendemos cerveza de excelencia, que no solo satisface tu paladar, sino que conecta con tu estilo de vida.</p>
+              <p>
+                Vendemos cerveza de excelencia, que no solo satisface tu
+                paladar, sino que conecta con tu estilo de vida.
+              </p>
             </div>
           </div>
         </section>
@@ -194,7 +238,10 @@
 
         <section id="tracking" class="tab-content">
           <h2>¡Descubrí el recorrido de tu Sahara!</h2>
-          <h4>Utilizamos dispositivos IoT para hacer seguimiento de tu cerveza y garantizarte la excelencia que nos caracteriza.</h4>
+          <h4>
+            Utilizamos dispositivos IoT para hacer seguimiento de tu cerveza y
+            garantizarte la excelencia que nos caracteriza.
+          </h4>
           <div class="tracking-container">
             <div class="tracking-step">
               <img
@@ -204,11 +251,14 @@
               <div class="tracking-text">
                 <h3>1. Inicio en Tandil</h3>
                 <p>
-                  Tu cerveza Sahara comenzó su viaje en campos de los alrededores de Tandil. 
-                  <br>Fue cosechada con los siguientes parámetros:
-                  <br><strong>Humedad de grano:</strong> 14,4%
-                  <br><strong>Temperatura ambiente:</strong> 16,2°C
-                  <br><strong>Fecha de cultivo:</strong> 12 de Diciembre de 2023
+                  Tu cerveza Sahara comenzó su viaje en campos de los
+                  alrededores de Tandil.
+                  <br />Fue cosechada con los siguientes parámetros:
+                  <br /><strong>Humedad de grano:</strong> 14,4% <br /><strong
+                    >Temperatura ambiente:</strong
+                  >
+                  16,2°C <br /><strong>Fecha de cultivo:</strong> 12 de
+                  Diciembre de 2023
                 </p>
               </div>
               <a
@@ -230,9 +280,8 @@
                   Antes de salir de nuestra fábrica, cada lote pasa por
                   rigurosos controles de calidad que aseguran su sabor y pureza
                   únicos.
-                  <br><strong>PH:</strong> 6,11
-                  <br><strong>Sabor:</strong> 2,4
-                  <br><strong>Tiempo de filtración:</strong> 58'
+                  <br /><strong>PH:</strong> 6,11 <br /><strong>Sabor:</strong>
+                  2,4 <br /><strong>Tiempo de filtración:</strong> 58'
                 </p>
               </div>
               <a
@@ -253,7 +302,10 @@
                 <p>
                   La cerveza es transportada en condiciones óptimas hacia
                   distintos puntos del país, respetando la cadena de frío.
-                  <br><strong>Puedes ver el recorrido que hizo la tuya haciendo click a la derecha.</strong>
+                  <br /><strong
+                    >Puedes ver el recorrido que hizo la tuya haciendo click a
+                    la derecha.</strong
+                  >
                 </p>
               </div>
               <a
@@ -272,7 +324,8 @@
               <div class="tracking-text">
                 <h3>4. Tu mesa</h3>
                 <p>
-                  Finalmente, llegó hasta vos. Disfrutá tu cerveza, esquiar y los cerros nevados no son lo mismo sin una Sahara en la mano.
+                  Finalmente, llegó hasta vos. Disfrutá tu cerveza, esquiar y
+                  los cerros nevados no son lo mismo sin una Sahara en la mano.
                   <br /><strong>Fecha de entrega:</strong>
                   <span id="delivery-date"></span>
                 </p>
