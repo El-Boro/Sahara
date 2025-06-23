@@ -998,4 +998,11 @@ h4 {
   html {
     scroll-behavior: smooth;
   }
+
+  .ranking-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
 }
