@@ -59,6 +59,28 @@ document.addEventListener("DOMContentLoaded", () => {
       if (tab.dataset.tab === "process") {
         restartProcessAnimations();
       }
+
+      // Actualizar posición en el ranking al entrar a la pestaña de ranking
+      if (tab.dataset.tab === "ranking") {
+        const sortedRanking = [...rankingData].sort(
+          (a, b) => b.score - a.score
+        );
+
+        if (userLoggedIn) {
+          let position =
+            sortedRanking.findIndex((user) => userPoints >= user.score) + 1;
+
+          document.getElementById("user-position").innerHTML = `
+      Se encuentra en la posición #${position}<br>
+      ¡Participas por un sorteo exclusivo de un viaje de esquí en Bariloche!
+    `;
+        } else {
+          document.getElementById("user-position").innerHTML = `
+      Se encuentra en la posición #0<br>
+      ¡Inicia sesión para participar por sorteos exclusivos!
+    `;
+        }
+      }
     });
   });
 
@@ -74,26 +96,41 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("profile").classList.add("active");
     document.getElementById("login").classList.remove("active");
 
+    userLoggedIn = true;
+
     // Mostrar nombre y puntos en Mi Ranking
     document.getElementById("ranking-user-name").textContent = username;
     document.getElementById(
       "ranking-user-points"
     ).textContent = `${userPoints} pts`;
 
-    // Calcular posición en el ranking si coincide el nombre
-    let position = rankingData.findIndex((user) => user.name === username);
-    if (position === -1) position = 11;
-    else position += 1;
+    // Ordenar ranking de mayor a menor por puntos
+    const sortedRanking = [...rankingData].sort((a, b) => b.score - a.score);
 
-    document.getElementById(
-      "user-position"
-    ).textContent = `Se encuentra en la posición #${position}`;
+    // Calcular posición comparando los puntos del usuario
+    let position =
+      sortedRanking.findIndex((user) => userPoints >= user.score) + 1;
+
+    document.getElementById("user-position").innerHTML = `
+  Se encuentra en la posición #${position}<br>
+  ¡Participa por un sorteo exclusivo!
+`;
   });
 
   // Datos de usuario
   let userPoints = 240;
   const rewards = [];
   const codeList = [];
+  let userLoggedIn = false; // NUEVO
+
+  // Mostrar posición por defecto si no se ha iniciado sesión
+  const userPositionElement = document.getElementById("user-position");
+  if (userPositionElement) {
+    userPositionElement.innerHTML = `
+    Se encuentra en la posición #0<br>
+    ¡inicia sesión para poder participar en sorteos exclusivos!
+  `;
+  }
 
   // Manejo de códigos
   document.getElementById("codeForm").addEventListener("submit", (e) => {
