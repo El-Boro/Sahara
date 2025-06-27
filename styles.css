@@ -855,6 +855,46 @@ h4 {
   font-size: 1.05rem;
 }
 
+.product-highlight {
+  text-align: center;
+  margin-top: 2rem;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.product-highlight h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.2rem;
+  color: #8a5a2d;
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.product-highlight h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #8a5a2d, #ffc107);
+  border-radius: 3px;
+}
+
+.product-highlight .product-image {
+  max-width: 400px;
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease;
+}
+
+.product-highlight .product-image:hover {
+  transform: scale(1.05);
+}
+
+
 /* Responsive: ajustes para móviles */
 @media (max-width: 768px) {
   .verification-container {
